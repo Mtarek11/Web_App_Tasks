@@ -1,0 +1,44 @@
+﻿﻿@using ViewModels;
+@model AddProductViewModel
+@{
+    List<SelectListItem> temp = ViewData["Categories"] as List<SelectListItem>;
+}
+
+<h1 class="display-1">Edit Product @Model.Name</h1>
+
+<form id="form" asp-action="Edit" asp-controller="product" method="post" enctype="multipart/form-data">
+    <input asp-for="Id" hidden />
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"> </textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" asp-items="temp" class="form-control">
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+   
+    
+    <div class="mb-3">
+        <label asp-for="Images" class="form-label"></label>
+        <input asp-for="Images" class="form-control" multiple>
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+   

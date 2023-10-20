@@ -1,0 +1,39 @@
+﻿﻿@using ViewModels;
+@model PaginationViewModel<List<ProductViewModel>>;
+@{
+    var categories = ViewData["Categories"] as List<SelectListItem>;
+    bool movenext = true;
+    bool moveback = true;
+}
+
+
+
+<form class="d-flex" asp-action="Search" asp-controller="Product" asp-route-PageSize="6" method="get">
+    <input class="form-control w-50" name="Name" type="text" placeholder="Name" />
+    <hr />
+    <input class="form-control w-50" name="Price" type="number" value="0" placeholder="Price" />
+    <hr />
+    <select class="form-control w-50" name="CategoryID" asp-items="@categories"></select>
+    <hr />
+    <button class="btn" type="submit">Confirm</button>
+</form>
+
+
+
+<div class="row">
+    @foreach (ProductViewModel item in Model.Data)
+    {
+        <div class="card col-4 bg-danger">
+
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Price $</p>
+                <p class="card-text">@item.CategoryName</p>
+
+            </div>
+        </div>
+    }
+</div>
+
+<a class="btn " asp-action="Search" asp-controller="Product" asp-route-PageSize="6" asp-route-PageIndex="@(Model.PageIndex-1)" disabled="@moveback">Back</a>
+<a class="btn " asp-action="Search" asp-controller="Product" asp-route-PageSize="6" asp-route-PageIndex="@(Model.PageIndex+1)" disabled="@movenext">Next</a>

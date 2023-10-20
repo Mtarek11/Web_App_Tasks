@@ -1,0 +1,72 @@
+﻿﻿@using ViewModels;
+@model UserSignUpViewModel;
+@{
+    Layout = null;
+    var list = ViewData["list"] as List<SelectListItem>;
+}
+
+<!Doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <form asp-action="SignUp" asp-controller="Account" method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter First Name">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your Data with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter Last Name">
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" placeholder="Enter User Name">
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Enter Password Again">
+            </div>
+
+
+            <div class="mb-3">
+                <label asp-for="Role" class="form-label"></label>
+
+                <input type="hidden" asp-for="Role" id="hiddenRoleInput" />
+
+                @foreach (var role in list)
+                {
+                    <button class="btn btn-primary role-button" data-role-value="@role.Value" onclick="setRoleValue(this)">
+                        @role.Text
+                    </button>
+                }
+
+
+            </div>
+
+            <script>
+                function setRoleValue(buttonElement) {
+                    var roleValue = buttonElement.getAttribute('data-role-value');
+                    document.getElementById('hiddenRoleInput').value = roleValue;
+                }
+            </script>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
