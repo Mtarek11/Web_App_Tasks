@@ -24,12 +24,6 @@ namespace Models
             builder.ApplyConfiguration(new ProductAttachmentsConfiguration());
             base.OnModelCreating(builder);
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=.; Initial Catalog=E-Commerce; 
-                 Integrated Security=True; TrustServerCertificate=True;");
-
-            base.OnConfiguring(optionsBuilder);
-        }
+       
     }
 }

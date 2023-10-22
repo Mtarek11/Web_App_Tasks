@@ -30,7 +30,7 @@ namespace Repository
         }
         public async Task<SignInResult> SignIn(UserSignInViewModel model)
         {
-            return await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+            return await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, true);
         }
         public async void SignOut()
         {
